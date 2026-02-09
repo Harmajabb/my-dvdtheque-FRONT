@@ -6,8 +6,8 @@ export interface User {
 }
 
 export interface AuthUser {
-    token: string;
-    user: User;
+  token: string;
+  user: User;
 }
 
 // Dvds Types
@@ -24,7 +24,7 @@ export interface Dvd {
   synopsis?: string;
   image_url?: string;
   emplacement?: string;
-  statut: 'en collection' | 'prêté' | 'perdu';
+  statut: "en collection" | "prêté" | "perdu";
   prete_a?: string;
   date_pret?: string;
   notes_perso?: string;
