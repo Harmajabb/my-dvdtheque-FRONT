@@ -11,10 +11,28 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noUnknownAtRules": "off"
+      },
+      "complexity": {
+        "noImportantStyles": "off"
+      }
     }
   },
   "javascript": {
     "jsxRuntime": "transparent"
+  },
+  "css": {
+    "parser": {
+      "cssModules": false,
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    }
   }
 }

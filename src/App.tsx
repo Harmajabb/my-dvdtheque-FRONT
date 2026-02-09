@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-  return <h1>Vite + React</h1>;
+  return <div className="bg-red-500 text-white p-4">Test Tailwind</div>;
 }
 
 export default App;
