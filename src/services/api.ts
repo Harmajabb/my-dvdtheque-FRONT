@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AuthUser, Dvd, DvdListResponse } from "../types";
 
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "http://localhost:5000/api";
 
 // Axios instance with default config
 const api = axios.create({

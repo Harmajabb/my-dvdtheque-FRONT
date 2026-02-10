@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         primary: { DEFAULT: "#2C3E50", light: "#34495E", dark: "#1A252F" },
-        accent: { DEFAULT: "#E74C3C", hover: "#C0392B" },
+        accent: { DEFAULT: "#C0392B", hover: "#A93226" },
         success: "#27AE60",
         warning: "#F39C12",
         danger: "#E74C3C",

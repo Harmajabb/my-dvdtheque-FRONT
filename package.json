@@ -16,6 +16,7 @@
 	"dependencies": {
 		"@axe-core/react": "^4.11.1",
 		"axios": "^1.13.5",
+		"lucide-react": "^0.563.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-router-dom": "^7.13.0"
