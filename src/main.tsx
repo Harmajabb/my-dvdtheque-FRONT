@@ -1,7 +1,6 @@
 import React, { StrictMode } from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import Footer from "./components/Footer/Footer.tsx";
 
 if (import.meta.env.DEV) {
   import("@axe-core/react").then((axe) => {
@@ -16,6 +15,5 @@ if (!rootElement) {
 createRoot(rootElement).render(
   <StrictMode>
     <App />
-    <Footer />
   </StrictMode>,
 );
