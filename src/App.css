@@ -120,10 +120,6 @@
     transition: all var(--dur-base);
   }
 
-  .card:hover {
-    @apply border-accent-hover shadow-[0_0_20px_rgba(231,76,60,0.2)] -translate-y-1;
-  }
-
   .form-group {
     margin-bottom: var(--sp-lg);
   }
@@ -172,12 +168,11 @@
   .title-with-line {
     @apply text-4xl font-bold text-accent leading-tight;
     @apply flex flex-col items-center;
-    gap: var(--sp-md);
   }
 
   .title-with-line span:first-child::after {
     content: "";
-    @apply block w-[100px] h-0.5 bg-accent mx-auto;
+    @apply block w-[250px] h-0.5 bg-accent mx-auto;
     margin-top: var(--sp-md);
   }
 }

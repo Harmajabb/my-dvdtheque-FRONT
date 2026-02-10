@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: "#2C3E50", light: "#34495E", dark: "#1A252F" },
-        accent: { DEFAULT: "#C0392B", hover: "#A93226" },
+        primary: { default: "#2C3E50", light: "#34495E", dark: "#1A252F" },
+        accent: { default: "#C0392B", hover: "#A93226" },
         success: "#27AE60",
         warning: "#F39C12",
         danger: "#E74C3C",
@@ -24,7 +24,7 @@ export default {
         "2xl": "clamp(1.5rem, 1.3rem + 1vw, 2.25rem)",
         "3xl": "clamp(1.875rem, 1.5rem + 1.875vw, 3rem)",
         "4xl": "clamp(2.25rem, 1.75rem + 2.5vw, 4rem)",
-        "5xl": "clamp(3.5rem, 15vw, 12rem)",
+        "5xl": "clamp(3.5rem, 15vw, 10rem)",
       },
       lineHeight: {
         tight: "1.25",

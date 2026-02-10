@@ -51,13 +51,21 @@ function Register() {
 
           {/* Message d'erreur */}
           {error && (
-            <div role="alert" aria-live="assertive" className="bg-red-50 border-l-4 border-danger text-danger px-4 py-3 rounded mb-6">
+            <div
+              role="alert"
+              aria-live="assertive"
+              className="bg-red-50 border-l-4 border-danger text-danger px-4 py-3 rounded mb-6"
+            >
               <p className="font-medium">{error}</p>
             </div>
           )}
 
           {/* Formulaire */}
-          <form onSubmit={handleSubmit} className="space-y-6" aria-label="Formulaire d'inscription">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6"
+            aria-label="Formulaire d'inscription"
+          >
             <div className="form-group">
               <label htmlFor="nom" className="form-label">
                 Nom
@@ -105,7 +113,9 @@ function Register() {
                 placeholder="••••••••"
                 aria-describedby="password-hint"
               />
-              <p id="password-hint" className="text-sm text-gray-500 mt-1">Minimum 6 caractères</p>
+              <p id="password-hint" className="text-sm text-gray-500 mt-1">
+                Minimum 6 caractères
+              </p>
             </div>
 
             <button

@@ -50,13 +50,21 @@ function Login() {
 
           {/* Message d'erreur */}
           {error && (
-            <div role="alert" aria-live="assertive" className="bg-red-50 border-l-4 border-danger text-danger px-4 py-3 rounded mb-6">
+            <div
+              role="alert"
+              aria-live="assertive"
+              className="bg-red-50 border-l-4 border-danger text-danger px-4 py-3 rounded mb-6"
+            >
               <p className="font-medium">{error}</p>
             </div>
           )}
 
           {/* Formulaire */}
-          <form onSubmit={handleSubmit} className="space-y-6" aria-label="Formulaire de connexion">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6"
+            aria-label="Formulaire de connexion"
+          >
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 Email
