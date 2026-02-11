@@ -43,7 +43,7 @@ function Login() {
               <Film size={60} aria-hidden="true" />
             </div>
             <h1 className="text-3xl font-bold text-primary">Ma DVDthèque</h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-zinc-600 mt-2">
               Connectez-vous à votre collection
             </p>
           </header>
@@ -109,7 +109,7 @@ function Login() {
 
           {/* Lien inscription */}
           <nav aria-label="Navigation" className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-zinc-600">
               Pas encore de compte ?{" "}
               <Link
                 to="/register"
@@ -121,7 +121,7 @@ function Login() {
             </p>
             <Link
               to="/"
-              className="inline-block mt-4 text-sm text-gray-500 underline hover:text-primary transition-colors"
+              className="inline-block mt-4 text-sm text-zinc-500 underline hover:text-primary transition-colors"
               tabIndex={0}
             >
               Retour à l'accueil

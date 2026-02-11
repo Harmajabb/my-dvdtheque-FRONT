@@ -24,8 +24,8 @@ const HowItWorks = () => {
         {/* Titre */}
         <header className="text-center mb-16">
           <h2 className="title-with-line">
-            <span className="lowercase">En trois étapes</span>
-            <span className="lowercase">ultra simples</span>
+            <span>En trois étapes</span>
+            <span>ultra simples</span>
           </h2>
         </header>
 

@@ -4,6 +4,10 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import { ProtectedRoute } from "./components/Root/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import AddDvd from "./pages/AddDvd/AddDvd";
+import DvdDetail from "./pages/DvdDetail/DvdDetail";
+import EditDvd from "./pages/EditDvd/EditDvd";
+import Home from "./pages/Home/Home";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -18,14 +22,38 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <ProtectedRoute>
-                <Navigate to="/dvds" replace />
+                <Home />
               </ProtectedRoute>
             }
           />
-          {/* Redirige toutes les routes non définies vers la page d'accueil ou une page 404 personnalisée */}
+          <Route
+            path="/add"
+            element={
+              <ProtectedRoute>
+                <AddDvd />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dvd/:id"
+            element={
+              <ProtectedRoute>
+                <DvdDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dvd/:id/edit"
+            element={
+              <ProtectedRoute>
+                <EditDvd />
+              </ProtectedRoute>
+            }
+          />
+          {/* All non definited root goes to the homepage */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />

@@ -98,7 +98,7 @@
   }
 
   .btn-secondary:hover:not(:disabled) {
-    @apply bg-gray-50;
+    @apply bg-zinc-50;
   }
 
   .btn-danger {
@@ -106,7 +106,7 @@
   }
 
   .btn-danger:hover:not(:disabled) {
-    @apply bg-[#C0392B];
+    @apply bg-[#991B1B];
   }
 
   .btn:disabled {
@@ -114,7 +114,7 @@
   }
 
   .card {
-    @apply bg-bg-darker rounded-lg border-2 border-accent;
+    @apply bg-bg-darker rounded-lg border-2 border-zinc-700;
     @apply text-center;
     padding: var(--sp-2xl);
     transition: all var(--dur-base);
@@ -133,7 +133,7 @@
   .form-select,
   .form-textarea {
     @apply w-full min-h-[44px] text-lg;
-    @apply border-2 border-gray-200 rounded-md;
+    @apply border-2 border-zinc-200 rounded-md;
     padding: var(--sp-md);
     transition:
       color var(--dur-base),

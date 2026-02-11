@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: "#2C3E50", light: "#34495E", dark: "#1A252F" },
+        primary: { DEFAULT: "#3f3f46", light: "#52525b", dark: "#27272a" },
         accent: { DEFAULT: "#C0392B", hover: "#A93226" },
         success: "#27AE60",
         warning: "#F39C12",
-        danger: "#E74C3C",
+        danger: "#B91C1C",
         bg: { dark: "#1a1a1a", darker: "#0a0a0a" },
       },
       fontFamily: {

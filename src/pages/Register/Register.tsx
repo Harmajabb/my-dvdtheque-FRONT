@@ -44,7 +44,7 @@ function Register() {
               <Film size={60} aria-hidden="true" />
             </div>
             <h1 className="text-3xl font-bold text-primary">Ma DVDthèque</h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-zinc-600 mt-2">
               Créez votre compte gratuitement
             </p>
           </header>
@@ -113,7 +113,7 @@ function Register() {
                 placeholder="••••••••"
                 aria-describedby="password-hint"
               />
-              <p id="password-hint" className="text-sm text-gray-500 mt-1">
+              <p id="password-hint" className="text-sm text-zinc-500 mt-1">
                 Minimum 6 caractères
               </p>
             </div>
@@ -130,7 +130,7 @@ function Register() {
 
           {/* Lien connexion */}
           <nav aria-label="Navigation" className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-zinc-600">
               Déjà un compte ?{" "}
               <Link
                 to="/login"
@@ -142,7 +142,7 @@ function Register() {
             </p>
             <Link
               to="/"
-              className="inline-block mt-4 text-sm text-gray-500 underline hover:text-primary transition-colors"
+              className="inline-block mt-4 text-sm text-zinc-500 underline hover:text-primary transition-colors"
               tabIndex={0}
             >
               Retour à l'accueil

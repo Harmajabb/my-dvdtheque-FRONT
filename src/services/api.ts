@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AuthUser, Dvd, DvdListResponse } from "../types";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 // Axios instance with default config
 const api = axios.create({
@@ -11,14 +11,29 @@ const api = axios.create({
   },
 });
 
-// token jwt interceptor
+// token jwt interceptor (exclut les routes d'authentification)
 api.interceptors.request.use((config) => {
+  const isAuthRoute = config.url?.startsWith("/auth/");
   const token = localStorage.getItem("token");
-  if (token) {
+  if (token && !isAuthRoute) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
+
+// 401 error for expirated/invalide token
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const isAuthRoute = error.config?.url?.startsWith("/auth/");
+    if (error.response?.status === 401 && !isAuthRoute) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  },
+);
 
 // Authentification
 
