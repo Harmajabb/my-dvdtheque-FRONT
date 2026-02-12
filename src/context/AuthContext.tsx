@@ -29,6 +29,7 @@ interface AuthContextType {
   register: (nom: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -36,6 +37,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   //usecallback for stop the re renders
   // [] = no dependences the function won't be recreated
@@ -56,11 +58,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (isTokenExpired(storedToken)) {
         //if yes then byyye
         logout();
-        return; // stop the execution
+      } else {
+        setToken(storedToken);
+        setUser(JSON.parse(storedUser));
       }
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
     }
+    setIsLoading(false);
   }, [logout]);
 
   const login = async (email: string, password: string) => {
@@ -79,7 +82,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, login, register, logout, isAuthenticated: !!token }}
+      value={{
+        user,
+        token,
+        login,
+        register,
+        logout,
+        isAuthenticated: !!token,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

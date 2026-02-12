@@ -17,6 +17,7 @@ function AddDvd() {
     annee: "",
     duree: "",
     genre: "",
+    nationalite: "",
     acteurs: "",
     synopsis: "",
     image_url: "",
@@ -205,6 +206,45 @@ function AddDvd() {
                       {g}
                     </option>
                   ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label
+                  htmlFor="nationalite"
+                  className="form-label !text-zinc-300"
+                >
+                  Nationalité
+                </label>
+                <select
+                  id="nationalite"
+                  value={formData.nationalite}
+                  onChange={(e) =>
+                    setFormData({ ...formData, nationalite: e.target.value })
+                  }
+                  className="form-select bg-zinc-700 border-zinc-600 text-white"
+                >
+                  <option value="">Sélectionner une nationalité</option>
+                  <option value="États-Unis">États-Unis</option>
+                  <option value="France">France</option>
+                  <option value="Royaume-Uni">Royaume-Uni</option>
+                  <option value="Japon">Japon</option>
+                  <option value="Corée du Sud">Corée du Sud</option>
+                  <option value="Allemagne">Allemagne</option>
+                  <option value="Italie">Italie</option>
+                  <option value="Espagne">Espagne</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australie">Australie</option>
+                  <option value="Chine">Chine</option>
+                  <option value="Inde">Inde</option>
+                  <option value="Mexique">Mexique</option>
+                  <option value="Brésil">Brésil</option>
+                  <option value="Suède">Suède</option>
+                  <option value="Danemark">Danemark</option>
+                  <option value="Norvège">Norvège</option>
+                  <option value="Russie">Russie</option>
+                  <option value="Hong Kong">Hong Kong</option>
+                  <option value="Nouvelle-Zélande">Nouvelle-Zélande</option>
                 </select>
               </div>
 

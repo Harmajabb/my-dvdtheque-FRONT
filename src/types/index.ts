@@ -12,24 +12,25 @@ export interface AuthUser {
 
 // Dvds Types
 export interface Dvd {
-  id: number;
-  user_id: number;
+  id: number | null;
+  user_id: number | null;
   titre: string;
-  titre_original?: string;
-  realisateur?: string;
-  annee?: number;
-  duree?: number;
-  genre?: string;
-  acteurs?: string;
-  synopsis?: string;
-  image_url?: string;
-  emplacement?: string;
+  titre_original?: string | null;
+  realisateur?: string | null;
+  annee?: number | null;
+  duree?: number | null;
+  genre?: string | null;
+  nationalite?: string | null;
+  acteurs?: string | null;
+  synopsis?: string | null;
+  image_url?: string | null;
+  emplacement?: string | null;
   statut: "en collection" | "prêté" | "perdu";
-  prete_a?: string;
-  date_pret?: string;
-  notes_perso?: string;
+  prete_a?: string | null;
+  date_pret?: string | null;
+  notes_perso?: string | null;
   date_ajout: string;
-  date_modification: string;
+  date_modification: string | null;
 }
 
 // types for api responses

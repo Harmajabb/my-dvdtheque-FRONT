@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Reveal } from "../../components/Reveal/Reveal";
 import { deleteDvd, getDvdById } from "../../services/api";
 import type { Dvd } from "../../types";
 
@@ -94,7 +95,7 @@ function DvdDetail() {
         </Link>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-1">
+          <Reveal variant="fade-in" className="md:col-span-1">
             <img
               src={dvd.image_url || "/placeholder.svg"}
               alt={dvd.titre}
@@ -106,9 +107,9 @@ function DvdDetail() {
                 }
               }}
             />
-          </div>
+          </Reveal>
 
-          <div className="md:col-span-2">
+          <Reveal variant="fade-in-up" delay={150} className="md:col-span-2">
             <div className="bg-zinc-800 rounded-lg shadow-lg p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
@@ -158,6 +159,14 @@ function DvdDetail() {
                     <span className="inline-block bg-accent text-white text-sm px-3 py-1 rounded-full font-semibold ml-2">
                       {dvd.genre}
                     </span>
+                  </div>
+                )}
+                {dvd.nationalite && (
+                  <div>
+                    <span className="text-zinc-400 font-semibold">
+                      Nationalité :
+                    </span>
+                    <span className="text-white ml-2">{dvd.nationalite}</span>
                   </div>
                 )}
 
@@ -240,7 +249,7 @@ function DvdDetail() {
                 </button>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </main>

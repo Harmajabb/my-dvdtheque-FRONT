@@ -18,6 +18,7 @@ function EditDvd() {
     annee: "",
     duree: "",
     genre: "",
+    nationalite: "",
     acteurs: "",
     synopsis: "",
     image_url: "",
@@ -54,13 +55,14 @@ function EditDvd() {
           annee: dvd.annee ? String(dvd.annee) : "",
           duree: dvd.duree ? String(dvd.duree) : "",
           genre: dvd.genre || "",
+          nationalite: dvd.nationalite || "",
           acteurs: dvd.acteurs || "",
           synopsis: dvd.synopsis || "",
           image_url: dvd.image_url || "",
           emplacement: dvd.emplacement || "",
           statut: dvd.statut,
           prete_a: dvd.prete_a || "",
-          date_pret: dvd.date_pret || "",
+          date_pret: dvd.date_pret ? dvd.date_pret.split("T")[0] : "",
           notes_perso: dvd.notes_perso || "",
         });
       } catch {
@@ -85,6 +87,10 @@ function EditDvd() {
         ),
         annee: formData.annee ? parseInt(formData.annee, 10) : undefined,
         duree: formData.duree ? parseInt(formData.duree, 10) : undefined,
+        ...(formData.statut !== "prêté" && {
+          prete_a: null,
+          date_pret: null,
+        }),
       };
       //update no create
       await updateDvd(Number(id), dvdData);
@@ -240,6 +246,45 @@ function EditDvd() {
                       {g}
                     </option>
                   ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label
+                  htmlFor="nationalite"
+                  className="form-label !text-zinc-300"
+                >
+                  Nationalité
+                </label>
+                <select
+                  id="nationalite"
+                  value={formData.nationalite}
+                  onChange={(e) =>
+                    setFormData({ ...formData, nationalite: e.target.value })
+                  }
+                  className="form-select bg-zinc-700 border-zinc-600 text-white"
+                >
+                  <option value="">Sélectionner une nationalité</option>
+                  <option value="États-Unis">États-Unis</option>
+                  <option value="France">France</option>
+                  <option value="Royaume-Uni">Royaume-Uni</option>
+                  <option value="Japon">Japon</option>
+                  <option value="Corée du Sud">Corée du Sud</option>
+                  <option value="Allemagne">Allemagne</option>
+                  <option value="Italie">Italie</option>
+                  <option value="Espagne">Espagne</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australie">Australie</option>
+                  <option value="Chine">Chine</option>
+                  <option value="Inde">Inde</option>
+                  <option value="Mexique">Mexique</option>
+                  <option value="Brésil">Brésil</option>
+                  <option value="Suède">Suède</option>
+                  <option value="Danemark">Danemark</option>
+                  <option value="Norvège">Norvège</option>
+                  <option value="Russie">Russie</option>
+                  <option value="Hong Kong">Hong Kong</option>
+                  <option value="Nouvelle-Zélande">Nouvelle-Zélande</option>
                 </select>
               </div>
 

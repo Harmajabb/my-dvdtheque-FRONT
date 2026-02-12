@@ -1,3 +1,5 @@
+import { Reveal } from "../Reveal/Reveal";
+
 const About = () => {
   const benefits = [
     {
@@ -32,38 +34,39 @@ const About = () => {
       id="about"
     >
       <div className="container-custom">
-        <header className="text-center mb-16">
+        <Reveal as="header" className="text-center mb-16">
           <h2 className="title-with-line">
             <span>Ma collection</span>
             <span>sous contrôle</span>
           </h2>
-        </header>
+        </Reveal>
 
         <div className="grid grid-cols-2 gap-8 max-w-[900px] mx-auto mb-16 max-md:grid-cols-1 max-md:gap-6">
-          {benefits.map((benefit) => (
-            <article
-              key={benefit.id}
-              className="card p-10 max-md:p-8 max-[480px]:p-6"
-            >
-              <h3 className="text-xl font-semibold text-accent mb-4">
-                {benefit.title}
-              </h3>
-              <p className="text-base text-white/90 leading-relaxed m-0 max-[480px]:text-sm">
-                {benefit.description}
-              </p>
-            </article>
+          {benefits.map((benefit, index) => (
+            <Reveal key={benefit.id} variant="fade-in-up" delay={index * 150}>
+              <article className="card p-10 max-md:p-8 max-[480px]:p-6">
+                <h3 className="text-xl font-semibold text-accent mb-4">
+                  {benefit.title}
+                </h3>
+                <p className="text-base text-white/90 leading-relaxed m-0 max-[480px]:text-sm">
+                  {benefit.description}
+                </p>
+              </article>
+            </Reveal>
           ))}
         </div>
 
-        <article className="bg-bg-darker p-10 rounded-lg text-center max-w-[900px] mx-auto border border-white/10 max-md:p-8 max-[480px]:p-6">
-          <p className="text-lg text-white/85 m-0 leading-relaxed max-md:text-base">
-            <strong className="font-bold text-white">
-              Conçu pour être simple:
-            </strong>{" "}
-            Pas besoin d'être un expert en informatique. Si vous savez utiliser
-            un téléphone, vous saurez utiliser Ma DVDthèque.
-          </p>
-        </article>
+        <Reveal variant="fade-in" delay={700}>
+          <article className="bg-bg-darker p-10 rounded-lg text-center max-w-[900px] mx-auto border border-white/10 max-md:p-8 max-[480px]:p-6">
+            <p className="text-lg text-white/85 m-0 leading-relaxed max-md:text-base">
+              <strong className="font-bold text-white">
+                Conçu pour être simple:
+              </strong>{" "}
+              Pas besoin d'être un expert en informatique. Si vous savez
+              utiliser un téléphone, vous saurez utiliser Ma DVDthèque.
+            </p>
+          </article>
+        </Reveal>
       </div>
     </section>
   );

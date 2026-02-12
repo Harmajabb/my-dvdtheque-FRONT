@@ -1,7 +1,7 @@
 import type { Dvd } from "../../types";
 import DvdCard from "../DvdCard/DvdCard";
+import { Reveal } from "../Reveal/Reveal";
 
-//waiting for a dvd tab
 interface DvdListProps {
   dvds: Dvd[];
 }
@@ -17,11 +17,14 @@ function DvdList({ dvds }: DvdListProps) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-      {/* transform each dvd in a dvdCard component */}
-      {dvds.map((dvd) => (
-        // key={dvd.id} for re-render
-        // dvd={dvd} for prop the children
-        <DvdCard key={dvd.id} dvd={dvd} />
+      {dvds.map((dvd, index) => (
+        <Reveal
+          key={dvd.id}
+          variant="fade-in-up"
+          delay={Math.min(index * 100, 800)}
+        >
+          <DvdCard dvd={dvd} />
+        </Reveal>
       ))}
     </div>
   );

@@ -1,32 +1,48 @@
 import axios from "axios";
 import { Film } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Reveal } from "../../components/Reveal/Reveal";
-import { useAuth } from "../../context/AuthContext";
+import { resetPassword } from "../../services/api";
 
-function Login() {
-  const [email, setEmail] = useState("");
+function ResetPassword() {
+  const { token } = useParams<{ token: string }>();
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { login } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setError("");
+
+    if (password.length < 8) {
+      setError("Le mot de passe doit faire au moins 8 caractères.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    if (!token) {
+      setError("Lien de réinitialisation invalide.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await login(email, password);
-      navigate("/");
+      await resetPassword(token, password);
+      navigate("/login", { state: { resetSuccess: true } });
     } catch (err: unknown) {
       const message = axios.isAxiosError(err)
-        ? ((err.response?.data as { error?: string })?.error ??
-          "Erreur de connexion")
-        : "Erreur de connexion";
+        ? ((err.response?.data as { message?: string })?.message ??
+          "Une erreur est survenue")
+        : "Une erreur est survenue";
 
       setError(message);
     } finally {
@@ -38,18 +54,18 @@ function Login() {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-accent to-accent-hover px-4">
       <Reveal className="w-full max-w-md" duration={1000}>
         <div className="bg-white rounded-lg shadow-2xl p-8">
-          {/* Logo / Titre */}
           <header className="text-center mb-8">
             <div className="text-4xl font-bold text-accent mb-2 flex justify-center">
               <Film size={60} aria-hidden="true" />
             </div>
-            <h1 className="text-3xl font-bold text-primary">Ma DVDthèque</h1>
+            <h1 className="text-3xl font-bold text-primary">
+              Nouveau mot de passe
+            </h1>
             <p className="text-zinc-600 mt-2">
-              Connectez-vous à votre collection
+              Choisissez votre nouveau mot de passe
             </p>
           </header>
 
-          {/* Message d'erreur */}
           {error && (
             <div
               role="alert"
@@ -60,31 +76,14 @@ function Login() {
             </div>
           )}
 
-          {/* Formulaire */}
           <form
             onSubmit={handleSubmit}
             className="space-y-6"
-            aria-label="Formulaire de connexion"
+            aria-label="Formulaire de réinitialisation de mot de passe"
           >
             <div className="form-group">
-              <label htmlFor="email" className="form-label text-zinc-600">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
-                placeholder="votre@email.com"
-              />
-            </div>
-
-            <div className="form-group">
               <label htmlFor="password" className="form-label text-zinc-600">
-                Mot de passe
+                Nouveau mot de passe
               </label>
               <input
                 id="password"
@@ -92,7 +91,32 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                autoComplete="current-password"
+                autoComplete="new-password"
+                minLength={8}
+                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
+                placeholder="••••••••"
+                aria-describedby="password-hint"
+              />
+              <p id="password-hint" className="text-sm text-zinc-500 mt-1">
+                Minimum 8 caractères
+              </p>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="confirm-password"
+                className="form-label text-zinc-600"
+              >
+                Confirmer le mot de passe
+              </label>
+              <input
+                id="confirm-password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                autoComplete="new-password"
+                minLength={8}
                 className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
                 placeholder="••••••••"
               />
@@ -104,37 +128,17 @@ function Login() {
               aria-busy={loading}
               className="btn btn-primary w-full"
             >
-              {loading ? "Connexion..." : "Se connecter"}
+              {loading ? "Mise à jour..." : "Mettre à jour le mot de passe"}
             </button>
           </form>
 
-          {/* Lien mot de passe oublié + inscription */}
           <nav aria-label="Navigation" className="mt-6 text-center">
-            <p className="mb-4">
-              <Link
-                to="/forgot-password"
-                className="text-sm text-zinc-500 hover:text-accent transition-colors"
-                tabIndex={0}
-              >
-                Mot de passe oublié ?
-              </Link>
-            </p>
-            <p className="text-zinc-600">
-              Pas encore de compte ?{" "}
-              <Link
-                to="/register"
-                className="text-accent font-semibold hover:text-accent-hover transition-colors"
-                tabIndex={0}
-              >
-                S'inscrire
-              </Link>
-            </p>
             <Link
-              to="/"
-              className="inline-block mt-4 text-sm text-zinc-500 underline hover:text-primary transition-colors"
+              to="/login"
+              className="text-accent font-semibold hover:text-accent-hover transition-colors"
               tabIndex={0}
             >
-              Retour à l'accueil
+              Retour à la connexion
             </Link>
           </nav>
         </div>
@@ -143,4 +147,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ResetPassword;

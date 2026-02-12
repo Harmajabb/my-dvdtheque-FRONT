@@ -53,6 +53,27 @@ export const login = async (
   return response.data;
 };
 
+export const forgotPassword = async (
+  email: string,
+): Promise<{ message: string }> => {
+  const response = await api.post<{ message: string }>(
+    "/auth/forgot-password",
+    { email },
+  );
+  return response.data;
+};
+
+export const resetPassword = async (
+  token: string,
+  password: string,
+): Promise<{ message: string }> => {
+  const response = await api.post<{ message: string }>("/auth/reset-password", {
+    token,
+    password,
+  });
+  return response.data;
+};
+
 // Dvds
 
 export const getDvds = async (
@@ -87,9 +108,13 @@ export const deleteDvd = async (id: number): Promise<void> => {
   await api.delete(`/dvds/${id}`);
 };
 
-export const searchDvds = async (query: string): Promise<Dvd[]> => {
-  const response = await api.get<Dvd[]>("/dvds/search", {
-    params: { q: query },
+export const searchDvds = async (
+  query: string,
+  page: number = 1,
+  limit: number = 30,
+): Promise<DvdListResponse> => {
+  const response = await api.get<DvdListResponse>("/dvds/search", {
+    params: { q: query, page, limit },
   });
   return response.data;
 };

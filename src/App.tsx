@@ -7,10 +7,13 @@ import { AuthProvider } from "./context/AuthContext";
 import AddDvd from "./pages/AddDvd/AddDvd";
 import DvdDetail from "./pages/DvdDetail/DvdDetail";
 import EditDvd from "./pages/EditDvd/EditDvd";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import Stats from "./pages/Stats/Stats";
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route
             path="/home"
             element={
@@ -50,6 +55,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <EditDvd />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/stats"
+            element={
+              <ProtectedRoute>
+                <Stats />
               </ProtectedRoute>
             }
           />

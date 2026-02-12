@@ -2,6 +2,7 @@ import axios from "axios";
 import { Film } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Reveal } from "../../components/Reveal/Reveal";
 import { useAuth } from "../../context/AuthContext";
 
 function Register() {
@@ -36,7 +37,7 @@ function Register() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-accent to-accent-hover px-4">
-      <div className="w-full max-w-md">
+      <Reveal className="w-full max-w-md" duration={1000}>
         <div className="bg-white rounded-lg shadow-2xl p-8">
           {/* Logo / Titre */}
           <header className="text-center mb-8">
@@ -67,7 +68,7 @@ function Register() {
             aria-label="Formulaire d'inscription"
           >
             <div className="form-group">
-              <label htmlFor="nom" className="form-label">
+              <label htmlFor="nom" className="form-label text-zinc-600">
                 Nom
               </label>
               <input
@@ -76,13 +77,13 @@ function Register() {
                 value={nom}
                 onChange={(e) => setNom(e.target.value)}
                 required
-                className="form-input"
+                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
                 placeholder="Votre nom"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="email" className="form-label text-zinc-600">
                 Email
               </label>
               <input
@@ -92,13 +93,13 @@ function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="form-input"
+                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
                 placeholder="votre@email.com"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="password" className="form-label">
+              <label htmlFor="password" className="form-label text-zinc-600">
                 Mot de passe
               </label>
               <input
@@ -109,7 +110,7 @@ function Register() {
                 required
                 autoComplete="new-password"
                 minLength={6}
-                className="form-input"
+                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
                 placeholder="••••••••"
                 aria-describedby="password-hint"
               />
@@ -149,7 +150,7 @@ function Register() {
             </Link>
           </nav>
         </div>
-      </div>
+      </Reveal>
     </main>
   );
 }

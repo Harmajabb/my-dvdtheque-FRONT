@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DvdList from "../../components/DvdList/DvdList";
 import Filters, { type FilterState } from "../../components/Filters/Filters";
+import { Reveal } from "../../components/Reveal/Reveal";
 import SearchBar from "../../components/Search/SearchBar";
 import { getDvds, searchDvds } from "../../services/api";
 import type { Dvd } from "../../types";
@@ -24,32 +25,36 @@ function Home() {
     sortBy: "titre",
   });
 
-  //loading for the dvds
+  //loading for the dvds (normal mode + search mode)
   useEffect(() => {
-    if (isSearchMode) return; //do not load if search mode
     const run = async () => {
       try {
-        setError(""); //error unistall
-        setLoading(true); // activate the loading
-        // call the API
-        const data = await getDvds(page);
-        //update the useState
+        setError("");
+        setLoading(true);
+
+        const data = isSearchMode
+          ? await searchDvds(searchQuery, page)
+          : await getDvds(page);
+
         setDvds(data.dvds);
         setAllDvds(data.dvds);
         setTotalPages(data.totalPages);
       } catch (_err) {
-        setError("Erreur lors du chargement des dvds");
+        setError(
+          isSearchMode
+            ? "Erreur lors de la recherche"
+            : "Erreur lors du chargement des dvds",
+        );
       } finally {
         setLoading(false);
       }
     };
 
-    //call the function
     run();
-  }, [page, isSearchMode]);
+  }, [page, isSearchMode, searchQuery]);
 
   // search let's gooo
-  const handleSearch = async (query: string) => {
+  const handleSearch = (query: string) => {
     if (!query.trim()) {
       // normal mode
       setIsSearchMode(false);
@@ -58,23 +63,9 @@ function Home() {
       return;
     }
 
-    try {
-      setError("");
-      setLoading(true);
-      setIsSearchMode(true);
-      setSearchQuery(query);
-
-      const results = await searchDvds(query);
-      setAllDvds(results);
-
-      //apply filters now
-      const filtered = applyFilters(results);
-      setDvds(filtered);
-    } catch (_err) {
-      setError("Erreur lors de la recherche");
-    } finally {
-      setLoading(false);
-    }
+    setIsSearchMode(true);
+    setSearchQuery(query);
+    setPage(1);
   };
 
   // filters for clients
@@ -124,18 +115,57 @@ function Home() {
     new Set(allDvds.map((d) => d.genre).filter(Boolean)),
   ) as string[];
 
+  const pagination = totalPages > 1 && (
+    <div className="flex justify-center items-center gap-4">
+      <button
+        type="button"
+        onClick={() => setPage((p) => Math.max(1, p - 1))}
+        disabled={page === 1}
+        className="btn btn-secondary"
+      >
+        Précédent
+      </button>
+      <span className="font-semibold text-lg text-white flex items-center gap-2">
+        Page
+        <select
+          value={page}
+          onChange={(e) => setPage(Number(e.target.value))}
+          className="bg-zinc-800 text-white border border-zinc-600 rounded px-2 py-1 text-lg cursor-pointer focus:outline-none focus:border-accent"
+        >
+          {Array.from({ length: totalPages }, (_, i) => {
+            const pageNum = i + 1;
+            return (
+              <option key={`page-${pageNum}`} value={pageNum}>
+                {pageNum}
+              </option>
+            );
+          })}
+        </select>
+        sur {totalPages}
+      </span>
+      <button
+        type="button"
+        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+        disabled={page === totalPages}
+        className="btn btn-secondary"
+      >
+        Suivant
+      </button>
+    </div>
+  );
+
   return (
     <main className="min-h-screen bg-bg-dark">
       <div className="container-custom py-8">
         {/* Header */}
-        <div className="mb-8">
+        <Reveal className="mb-8">
           <h1 className="text-4xl font-bold text-accent mb-2">Ma Collection</h1>
           <p className="text-zinc-300 text-lg">
             {dvds.length > 0
               ? `${dvds.length} DVD${dvds.length > 1 ? "s" : ""}`
               : "Collection vide"}
           </p>
-        </div>
+        </Reveal>
         {/* searchbar */}
         <SearchBar onSearch={handleSearch} currentQuery={searchQuery} />
 
@@ -161,57 +191,12 @@ function Home() {
         ) : (
           <>
             {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-8 mb-8">
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1} //protection for the page which doesn't exist
-                  className="btn btn-secondary"
-                >
-                  Précédent
-                </button>
-                <span className="font-semibold text-lg text-white">
-                  Page {page} sur {totalPages}
-                </span>
-                <button
-                  type="button"
-                  //math min helps to prevent bug with disabled
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  className="btn btn-secondary"
-                >
-                  Suivant
-                </button>
-              </div>
-            )}
+            <div className="mb-8">{pagination}</div>
 
             <DvdList dvds={dvds} />
 
             {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-8 mt-12">
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  className="btn btn-secondary"
-                >
-                  Précédent
-                </button>
-                <span className="font-semibold text-lg text-white">
-                  Page {page} sur {totalPages}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  className="btn btn-secondary"
-                >
-                  Suivant
-                </button>
-              </div>
-            )}
+            <div className="mt-12">{pagination}</div>
           </>
         )}
       </div>
