@@ -58,7 +58,10 @@ function DvdDetail() {
     return (
       <main className="min-h-screen bg-bg-dark">
         <div className="container-custom py-8">
-          <div role="alert" className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
+          <div
+            role="alert"
+            className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6"
+          >
             {error || "DVD introuvable"}
           </div>
           <Link to="/home" className="text-accent hover:underline">

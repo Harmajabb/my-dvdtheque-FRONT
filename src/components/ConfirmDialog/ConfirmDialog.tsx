@@ -43,7 +43,10 @@ function ConfirmDialog({
       className="bg-zinc-800 text-white rounded-lg shadow-2xl p-0 max-w-md w-full backdrop:bg-black/50"
     >
       <div className="p-6">
-        <h2 id="confirm-dialog-title" className="text-xl font-bold text-accent mb-3">
+        <h2
+          id="confirm-dialog-title"
+          className="text-xl font-bold text-accent mb-3"
+        >
           {title}
         </h2>
         <p id="confirm-dialog-message" className="text-zinc-300 mb-6">

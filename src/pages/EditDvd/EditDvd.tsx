@@ -125,7 +125,10 @@ function EditDvd() {
         <h1 className="text-4xl font-bold text-accent mb-8">Modifier le DVD</h1>
 
         {error && (
-          <div role="alert" className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
+          <div
+            role="alert"
+            className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6"
+          >
             {error}
           </div>
         )}
