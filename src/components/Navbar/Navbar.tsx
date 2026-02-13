@@ -22,7 +22,7 @@ function Navbar() {
             onClick={closeMenu}
             tabIndex={0}
           >
-            <Film size={30} aria-hidden="true" tabIndex={0} />
+            <Film size={30} aria-hidden="true" />
             <span>Ma DVDthèque</span>
           </Link>
 

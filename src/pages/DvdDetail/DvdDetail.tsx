@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import ConfirmDialog from "../../components/ConfirmDialog/ConfirmDialog";
 import { Reveal } from "../../components/Reveal/Reveal";
 import { deleteDvd, getDvdById } from "../../services/api";
 import type { Dvd } from "../../types";
@@ -10,6 +11,7 @@ function DvdDetail() {
   const [dvd, setDvd] = useState<Dvd | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   //fetch dvd to get the data
   useEffect(() => {
@@ -30,9 +32,6 @@ function DvdDetail() {
 
   //to delete the dvd
   const handleDelete = async () => {
-    //with window confirmation
-    if (!window.confirm("Voulez-vous vraiment supprimer ce DVD ?")) return;
-
     try {
       await deleteDvd(Number(id));
       navigate("/home");
@@ -46,9 +45,9 @@ function DvdDetail() {
     return (
       <main className="min-h-screen bg-bg-dark">
         <div className="container-custom py-8">
-          <p className="text-xl text-zinc-300 text-center py-16">
-            Chargement...
-          </p>
+          <output className="block text-center py-16">
+            <p className="text-xl text-zinc-300">Chargement...</p>
+          </output>
         </div>
       </main>
     );
@@ -59,7 +58,7 @@ function DvdDetail() {
     return (
       <main className="min-h-screen bg-bg-dark">
         <div className="container-custom py-8">
-          <div className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
+          <div role="alert" className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
             {error || "DVD introuvable"}
           </div>
           <Link to="/home" className="text-accent hover:underline">
@@ -242,7 +241,7 @@ function DvdDetail() {
                 </Link>
                 <button
                   type="button"
-                  onClick={handleDelete}
+                  onClick={() => setShowDeleteDialog(true)}
                   className="btn bg-danger text-white hover:bg-red-700 transition-colors px-6 py-2 rounded-md font-semibold"
                 >
                   Supprimer
@@ -252,6 +251,19 @@ function DvdDetail() {
           </Reveal>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={showDeleteDialog}
+        title="Supprimer ce DVD"
+        message="Voulez-vous vraiment supprimer ce DVD ? Cette action est irréversible."
+        confirmLabel="Supprimer"
+        cancelLabel="Annuler"
+        onConfirm={() => {
+          setShowDeleteDialog(false);
+          handleDelete();
+        }}
+        onCancel={() => setShowDeleteDialog(false)}
+      />
     </main>
   );
 }

@@ -35,7 +35,7 @@ const About = () => {
     >
       <div className="container-custom">
         <Reveal as="header" className="text-center mb-16">
-          <h2 className="title-with-line">
+          <h2 className="title-with-line" aria-label="Ma collection sous contrôle">
             <span>Ma collection</span>
             <span>sous contrôle</span>
           </h2>

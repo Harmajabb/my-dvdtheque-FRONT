@@ -52,9 +52,9 @@ function Stats() {
     return (
       <main className="min-h-screen bg-bg-dark">
         <div className="container-custom py-8">
-          <p className="text-xl text-zinc-300 text-center py-16">
-            Chargement...
-          </p>
+          <output className="block text-center py-16">
+            <p className="text-xl text-zinc-300">Chargement...</p>
+          </output>
         </div>
       </main>
     );

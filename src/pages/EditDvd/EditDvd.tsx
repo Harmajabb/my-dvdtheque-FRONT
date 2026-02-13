@@ -111,9 +111,9 @@ function EditDvd() {
     return (
       <main className="min-h-screen bg-bg-dark">
         <div className="container-custom py-8">
-          <p className="text-xl text-zinc-300 text-center py-16">
-            Chargement...
-          </p>
+          <output className="block text-center py-16">
+            <p className="text-xl text-zinc-300">Chargement...</p>
+          </output>
         </div>
       </main>
     );
@@ -125,7 +125,7 @@ function EditDvd() {
         <h1 className="text-4xl font-bold text-accent mb-8">Modifier le DVD</h1>
 
         {error && (
-          <div className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
+          <div role="alert" className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
             {error}
           </div>
         )}
@@ -339,7 +339,7 @@ function EditDvd() {
                 {formData.image_url && (
                   <img
                     src={formData.image_url}
-                    alt="Aperçu"
+                    alt={`Aperçu de la jaquette : ${formData.titre || "DVD"}`}
                     className="mt-4 max-w-xs rounded-lg shadow-md"
                     onError={(e) => {
                       const img = e.target as HTMLImageElement;

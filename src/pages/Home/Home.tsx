@@ -91,7 +91,7 @@ function Home() {
         case "annee_desc":
           return (b.annee || 0) - (a.annee || 0);
         case "annee_asc":
-          return (b.annee || 0) - (a.annee || 0);
+          return (a.annee || 0) - (b.annee || 0);
         case "date_ajout":
           return (
             new Date(b.date_ajout).getTime() - new Date(a.date_ajout).getTime()
@@ -130,6 +130,7 @@ function Home() {
         <select
           value={page}
           onChange={(e) => setPage(Number(e.target.value))}
+          aria-label="Numéro de page"
           className="bg-zinc-800 text-white border border-zinc-600 rounded px-2 py-1 text-lg cursor-pointer focus:outline-none focus:border-accent"
         >
           {Array.from({ length: totalPages }, (_, i) => {
@@ -178,16 +179,16 @@ function Home() {
         )}
         {/* Message d'erreur */}
         {error && (
-          <div className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
+          <div role="alert" className="bg-red-900/30 border-l-4 border-danger text-red-300 px-4 py-3 rounded mb-6">
             {error}
           </div>
         )}
 
         {/* Chargement */}
         {loading ? (
-          <div className="text-center py-16">
+          <output className="block text-center py-16">
             <p className="text-xl text-zinc-300">Chargement...</p>
-          </div>
+          </output>
         ) : (
           <>
             {/* Pagination */}

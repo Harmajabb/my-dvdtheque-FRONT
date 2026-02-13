@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import { ProtectedRoute } from "./components/Root/ProtectedRoute";
+import ScrollToTop from "./components/Root/ScrollToTop";
 import { AuthProvider } from "./context/AuthContext";
 import AddDvd from "./pages/AddDvd/AddDvd";
 import DvdDetail from "./pages/DvdDetail/DvdDetail";
@@ -19,6 +20,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Landing />} />

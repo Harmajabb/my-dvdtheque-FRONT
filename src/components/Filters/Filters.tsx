@@ -24,8 +24,8 @@ function Filters({
     });
   };
   return (
-    <div className="bg-zinc-800 rounded-lg p-6 mb-6">
-      <h3 className="text-xl font-bold text-accent mb-4">Filtres</h3>
+    <fieldset className="bg-zinc-800 rounded-lg p-6 mb-6 border-0">
+      <legend className="text-xl font-bold text-accent mb-4">Filtres</legend>
 
       <div className="grid md:grid-cols-3 gap-4">
         {/* Genre */}
@@ -86,7 +86,7 @@ function Filters({
           </select>
         </div>
       </div>
-    </div>
+    </fieldset>
   );
 }
 
