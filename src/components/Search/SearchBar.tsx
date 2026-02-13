@@ -26,6 +26,7 @@ function SearchBar({ onSearch, currentQuery }: SearchBarProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Rechercher un titre, réalisateur, acteur..."
+          aria-label="Rechercher un DVD par titre, réalisateur ou acteur"
           className="form-input flex-1 bg-zinc-700 border-zinc-600 text-white placeholder-zinc-400"
         />
         <button type="submit" className="btn btn-primary">

@@ -58,10 +58,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <hr
-          className="border-0 border-t border-white/20 my-10"
-          aria-hidden="false"
-        />
+        <hr className="border-0 border-t border-white/20 my-10" />
         <div className="flex justify-between items-center flex-wrap gap-4 max-md:flex-col max-md:text-center">
           <p className="text-sm text-white/50 m-0">
             © {currentYear} Ma DVDthèque · Projet open source sous licence MIT

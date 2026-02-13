@@ -69,7 +69,7 @@ function Register() {
           >
             <div className="form-group">
               <label htmlFor="nom" className="form-label text-zinc-600">
-                Nom
+                Prénom
               </label>
               <input
                 id="nom"
@@ -109,13 +109,13 @@ function Register() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="new-password"
-                minLength={6}
+                minLength={8}
                 className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
                 placeholder="••••••••"
                 aria-describedby="password-hint"
               />
               <p id="password-hint" className="text-sm text-zinc-500 mt-1">
-                Minimum 6 caractères
+                Minimum 8 caractères
               </p>
             </div>
 

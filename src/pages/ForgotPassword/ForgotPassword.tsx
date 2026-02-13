@@ -59,7 +59,7 @@ function ForgotPassword() {
 
           {success ? (
             <div className="text-center">
-              <div className="bg-green-50 border-l-4 border-green-500 text-green-700 px-4 py-3 rounded mb-6">
+              <output className="block bg-green-50 border-l-4 border-green-500 text-green-700 px-4 py-3 rounded mb-6">
                 <p className="font-medium">
                   Si cet email existe dans notre base, un lien de
                   réinitialisation a été envoyé.
@@ -67,7 +67,7 @@ function ForgotPassword() {
                 <p className="text-sm mt-2">
                   Vérifiez votre boîte mail (et vos spams).
                 </p>
-              </div>
+              </output>
               <Link
                 to="/login"
                 className="text-accent font-semibold hover:text-accent-hover transition-colors"

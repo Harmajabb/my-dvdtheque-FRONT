@@ -9,9 +9,9 @@ interface DvdListProps {
 function DvdList({ dvds }: DvdListProps) {
   if (dvds.length === 0) {
     return (
-      <div className="text-center py-16">
+      <output className="block text-center py-16">
         <p className="text-xl text-zinc-600">Aucun DVD dans votre collection</p>
-      </div>
+      </output>
     );
   }
 
