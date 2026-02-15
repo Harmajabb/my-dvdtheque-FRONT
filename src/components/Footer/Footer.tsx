@@ -19,7 +19,7 @@ const Footer = () => {
               Gérez votre collection de films et suivez vos prêts en toute
               simplicité.
             </p>
-            <div className="flex gap-4 max-md:justify-center">
+            <div className="flex gap-4 max-md:justify-center flex-wrap">
               <a
                 href="https://github.com/Harmajabb/my-dvdtheque-FRONT"
                 className="inline-flex items-center gap-2 py-2 px-4 text-white/70 bg-white/10 rounded-md no-underline text-sm font-medium transition-all duration-200 hover:text-white hover:bg-accent hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 motion-reduce:hover:translate-y-0"
@@ -38,7 +38,47 @@ const Footer = () => {
                 </svg>
                 <span className="text-base">GitHub</span>
               </a>
+              <a
+                href="https://www.themoviedb.org/"
+                className="inline-flex items-center gap-2 py-2 px-4 text-white/70 bg-white/10 rounded-md no-underline text-sm font-medium transition-all duration-200 hover:text-white hover:bg-[#01b4e4] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 motion-reduce:hover:translate-y-0"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="The Movie Database (TMDB)"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 190.24 81.52"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient
+                      id="tmdb-gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stopColor="#90cea1" />
+                      <stop offset="50%" stopColor="#3cbec9" />
+                      <stop offset="100%" stopColor="#00b3e5" />
+                    </linearGradient>
+                  </defs>
+                  <g fill="url(#tmdb-gradient)">
+                    <path d="M105.67 36.06h66.6a17.67 17.67 0 0 0 17.97-17.35A17.67 17.67 0 0 0 172.27.36h-66.6A17.67 17.67 0 0 0 87.7 17.71a17.67 17.67 0 0 0 17.97 18.35z" />
+                    <path d="M105.67 81.16h66.6a17.67 17.67 0 0 0 17.97-17.35 17.67 17.67 0 0 0-17.97-18.35h-66.6A17.67 17.67 0 0 0 87.7 62.81a17.67 17.67 0 0 0 17.97 18.35z" />
+                    <path d="M0 36.06h30.54a17.67 17.67 0 0 0 17.97-17.35A17.67 17.67 0 0 0 30.54.36H0v35.7z" />
+                    <path d="M48.54 81.16h30.53a17.67 17.67 0 0 0 17.97-17.35 17.67 17.67 0 0 0-17.97-18.35H48.54v35.7z" />
+                  </g>
+                </svg>
+                <span className="text-base">TMDB</span>
+              </a>
             </div>
+            <p className="text-xs text-white/40 mt-3 leading-relaxed max-w-md max-md:text-center">
+              Ce site web utilise TMDB et les API TMDB mais n'est pas approuvé,
+              certifié ou autrement approuvé par TMDB.
+            </p>
           </div>
           <div className="flex flex-col gap-4 max-md:text-center">
             <p className="text-base leading-relaxed text-white/80 m-0 max-[480px]:text-sm">

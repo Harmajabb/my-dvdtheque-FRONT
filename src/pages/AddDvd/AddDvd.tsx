@@ -1,6 +1,8 @@
 import { AxiosError } from "axios"; // if help to type correctly network error
+import { Film, Search } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MovieSearchModal from "../../components/MovieSearchModel/MovieSearchModal";
 import { createDvd } from "../../services/api";
 import type { Dvd } from "../../types";
 
@@ -8,6 +10,8 @@ function AddDvd() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //state forms
   const [formData, setFormData] = useState({
@@ -45,6 +49,19 @@ function AddDvd() {
     "Thriller",
     "Western",
   ];
+
+  // to help to fill with TMDB
+  const handleTmdbSelect = (movieData: Record<string, string>) => {
+    setFormData({
+      ...formData,
+      ...movieData,
+      emplacement: formData.emplacement,
+      statut: formData.statut,
+      prete_a: formData.prete_a,
+      date_pret: formData.date_pret,
+      notes_perso: formData.notes_perso,
+    });
+  };
 
   //form submit
   const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -91,6 +108,20 @@ function AddDvd() {
           </div>
         )}
 
+        {/* ===== BOUTON RECHERCHE TMDB ===== */}
+        <div className="mb-6">
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="btn btn-primary w-full sm:w-auto"
+          >
+            <Film size={20} aria-hidden="true" /> Rechercher un film dans TMDb
+          </button>
+          <p className="text-zinc-400 text-sm mt-2">
+            Auto-remplissage des informations depuis la base de données de films
+          </p>
+        </div>
+
         <form
           onSubmit={handleSubmit}
           className="bg-zinc-800 rounded-lg shadow-lg p-8 space-y-8"
@@ -106,16 +137,28 @@ function AddDvd() {
                 <label htmlFor="titre" className="form-label !text-zinc-300">
                   Titre *
                 </label>
-                <input
-                  id="titre"
-                  type="text"
-                  value={formData.titre}
-                  onChange={(e) =>
-                    setFormData({ ...formData, titre: e.target.value })
-                  }
-                  required
-                  className="form-input bg-zinc-700 border-zinc-600 text-white placeholder-zinc-400"
-                />
+                <div className="flex gap-2">
+                  <input
+                    id="titre"
+                    type="text"
+                    value={formData.titre}
+                    onChange={(e) =>
+                      setFormData({ ...formData, titre: e.target.value })
+                    }
+                    required
+                    className="form-input bg-zinc-700 border-zinc-600 text-white placeholder-zinc-400 flex-1"
+                  />
+                  {formData.titre && (
+                    <button
+                      type="button"
+                      onClick={() => setIsModalOpen(true)}
+                      className="btn btn-primary"
+                      aria-label="Rechercher ce film dans TMDb"
+                    >
+                      <Search size={24} />
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="form-group">
@@ -448,6 +491,12 @@ function AddDvd() {
           </div>
         </form>
       </div>
+      <MovieSearchModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSelect={handleTmdbSelect}
+        initialQuery={formData.titre}
+      />
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 interface ConfirmDialogProps {
@@ -20,7 +21,7 @@ function ConfirmDialog({
   onCancel,
 }: ConfirmDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const cancelRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -28,7 +29,7 @@ function ConfirmDialog({
 
     if (open) {
       dialog.showModal();
-      cancelRef.current?.focus();
+      closeRef.current?.focus();
     } else {
       dialog.close();
     }
@@ -43,18 +44,28 @@ function ConfirmDialog({
       className="bg-zinc-800 text-white rounded-lg shadow-2xl p-0 max-w-md w-full backdrop:bg-black/50"
     >
       <div className="p-6">
-        <h2
-          id="confirm-dialog-title"
-          className="text-xl font-bold text-accent mb-3"
-        >
-          {title}
-        </h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2
+            id="confirm-dialog-title"
+            className="text-xl font-bold text-accent"
+          >
+            {title}
+          </h2>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onCancel}
+            className="text-zinc-400 hover:text-white transition-colors p-1 rounded-md hover:bg-zinc-700"
+            aria-label="Fermer"
+          >
+            <X size={20} />
+          </button>
+        </div>
         <p id="confirm-dialog-message" className="text-zinc-300 mb-6">
           {message}
         </p>
         <div className="flex justify-end gap-3">
           <button
-            ref={cancelRef}
             type="button"
             onClick={onCancel}
             className="btn btn-secondary"
