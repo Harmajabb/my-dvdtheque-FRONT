@@ -23,12 +23,15 @@ function Login() {
       await login(email, password);
       navigate("/");
     } catch (err: unknown) {
-      const message = axios.isAxiosError(err)
-        ? ((err.response?.data as { error?: string })?.error ??
-          "Erreur de connexion")
-        : "Erreur de connexion";
-
-      setError(message);
+      if (axios.isAxiosError(err) && err.response?.status === 429) {
+        setError("Trop de tentatives de connexion. Veuillez patienter quelques instants avant de réessayer.");
+      } else {
+        const message = axios.isAxiosError(err)
+          ? ((err.response?.data as { error?: string })?.error ??
+            "Erreur de connexion")
+          : "Erreur de connexion";
+        setError(message);
+      }
     } finally {
       setLoading(false);
     }
