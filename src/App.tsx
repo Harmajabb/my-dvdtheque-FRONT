@@ -12,6 +12,8 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Home from "./pages/Home/Home";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
+import MentionsLegales from "./pages/MentionsLegales/MentionsLegales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite/PolitiqueConfidentialite";
 import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Stats from "./pages/Stats/Stats";
@@ -28,6 +30,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
           <Route
             path="/home"
             element={
