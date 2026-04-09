@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -103,6 +105,20 @@ const Footer = () => {
           <p className="text-sm text-white/50 m-0">
             © {currentYear} Ma DVDthèque · Projet open source sous licence MIT
           </p>
+          <nav aria-label="Liens légaux" className="flex gap-4 flex-wrap max-md:justify-center">
+            <Link
+              to="/mentions-legales"
+              className="text-sm text-white/40 hover:text-white/80 transition-colors underline-offset-2 hover:underline"
+            >
+              Mentions légales
+            </Link>
+            <Link
+              to="/politique-de-confidentialite"
+              className="text-sm text-white/40 hover:text-white/80 transition-colors underline-offset-2 hover:underline"
+            >
+              Politique de confidentialité
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
