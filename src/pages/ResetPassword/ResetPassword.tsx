@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Film } from "lucide-react";
+import { Eye, EyeOff, Film } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Reveal } from "../../components/Reveal/Reveal";
@@ -13,6 +13,8 @@ function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -85,18 +87,28 @@ function ResetPassword() {
               <label htmlFor="password" className="form-label text-zinc-600">
                 Nouveau mot de passe
               </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="new-password"
-                minLength={8}
-                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
-                placeholder="••••••••"
-                aria-describedby="password-hint"
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="new-password"
+                  minLength={8}
+                  className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400 pr-10"
+                  placeholder="••••••••"
+                  aria-describedby="password-hint"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+                  aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
               <p id="password-hint" className="text-sm text-zinc-500 mt-1">
                 Minimum 8 caractères
               </p>
@@ -109,17 +121,27 @@ function ResetPassword() {
               >
                 Confirmer le mot de passe
               </label>
-              <input
-                id="confirm-password"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                autoComplete="new-password"
-                minLength={8}
-                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <input
+                  id="confirm-password"
+                  type={showConfirmPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  autoComplete="new-password"
+                  minLength={8}
+                  className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400 pr-10"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+                  aria-label={showConfirmPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                >
+                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             <button

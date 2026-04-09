@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Film } from "lucide-react";
+import { Eye, EyeOff, Film } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Reveal } from "../../components/Reveal/Reveal";
@@ -10,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function Login() {
         setError("Trop de tentatives de connexion. Veuillez patienter quelques instants avant de réessayer.");
       } else {
         const message = axios.isAxiosError(err)
-          ? ((err.response?.data as { error?: string })?.error ??
+          ? ((err.response?.data as { message?: string })?.message ??
             "Erreur de connexion")
           : "Erreur de connexion";
         setError(message);
@@ -89,16 +90,26 @@ function Login() {
               <label htmlFor="password" className="form-label text-zinc-600">
                 Mot de passe
               </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="current-password"
-                className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="current-password"
+                  className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400 pr-10"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+                  aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             <button
