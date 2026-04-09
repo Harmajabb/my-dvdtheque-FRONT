@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nom, setNom] = useState("");
+  const [pseudo, setPseudo] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +22,7 @@ function Register() {
     setLoading(true);
 
     try {
-      await register(nom, email, password);
+      await register(pseudo, email, password);
       navigate("/");
     } catch (err: unknown) {
       const message = axios.isAxiosError(err)
@@ -69,17 +69,17 @@ function Register() {
             aria-label="Formulaire d'inscription"
           >
             <div className="form-group">
-              <label htmlFor="nom" className="form-label text-zinc-600">
-                Prénom
+              <label htmlFor="pseudo" className="form-label text-zinc-600">
+                Pseudo
               </label>
               <input
-                id="nom"
+                id="pseudo"
                 type="text"
-                value={nom}
-                onChange={(e) => setNom(e.target.value)}
+                value={pseudo}
+                onChange={(e) => setPseudo(e.target.value)}
                 required
                 className="form-input bg-zinc-100 text-zinc-800 border-zinc-300 placeholder:text-zinc-400"
-                placeholder="Votre nom"
+                placeholder="Votre pseudo"
               />
             </div>
 
