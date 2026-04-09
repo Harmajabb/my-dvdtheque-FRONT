@@ -38,11 +38,11 @@ api.interceptors.response.use(
 // Authentification
 
 export const register = async (
-  nom: string,
+  pseudo: string,
   email: string,
   password: string,
 ): Promise<void> => {
-  await api.post("/auth/register", { nom, email, password });
+  await api.post("/auth/register", { pseudo, email, password });
 };
 
 export const login = async (
