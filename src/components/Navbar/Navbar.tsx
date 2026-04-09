@@ -70,7 +70,7 @@ function Navbar() {
                 </Link>
 
                 <div className="flex items-center gap-4 ml-6 pl-6 border-l border-white/30">
-                  <span className="text-sm">Bonjour, {user?.nom}</span>
+                  <span className="text-sm">Bonjour, {user?.pseudo}</span>
                   <button
                     type="button"
                     onClick={logout}
@@ -131,7 +131,7 @@ function Navbar() {
                 </Link>
 
                 <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
-                  <span className="text-sm">Bonjour, {user?.nom}</span>
+                  <span className="text-sm">Bonjour, {user?.pseudo}</span>
                   <button
                     type="button"
                     onClick={() => {
